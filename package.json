@@ -1,4 +1,7 @@
 {
+  "name": "RPi Locator Bo",
+  "description": "Monitors rpilocator.com for your product of choice and notifies via Telegram if in stock",
+  "version": "1.0.0",
   "dependencies": {
     "dotenv": "^16.0.1",
     "rss-parser": "^3.12.0",

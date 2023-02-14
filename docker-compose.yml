@@ -2,14 +2,13 @@ version: '3.5'
 
 services:
   rpilocatorbot:
-    # image: registry.gitlab.com/cbrown350/rpilocatorbot:latest
-    build: .
+    image: registry.gitlab.com/cbrown350/rpilocatorbot:latest
+    # build: .
     container_name: rpilocatorbot
     restart: unless-stopped
     environment:
       - TZ=America/Denver
       - LOG_LEVEL=debug
-      - BOT_TOKEN=6276346945:AAGrOS67euXD7st5NZBJXS4D4C36mJfU6-Y
     volumes:
       - /etc/localtime:/etc/localtime:ro
       - ./sql:/sql
