@@ -1,0 +1,39 @@
+
+include:
+  - template: Security/SAST.gitlab-ci.yml
+
+test:
+  image: node:18
+  stage: test  
+  # when: manual
+  variables:
+    LOG_LEVEL: debug
+    MAX_CONCURRENCY_FETCH: 2
+  script:
+    - npm i
+    # - node -r dotenv/config src/test/test.js | ./node_modules/.bin/pino-pretty; test ${PIPESTATUS[0]} -eq 0
+
+deploy:
+  image: docker:23.0.1
+  stage: deploy
+  # when: manual
+  services:
+    - docker:23.0.1-dind
+  variables:
+    # Use TLS https://docs.gitlab.com/ee/ci/docker/using_docker_build.html#tls-enabled
+    DOCKER_HOST: tcp://docker:2376
+    DOCKER_TLS_CERTDIR: "/certs"
+  dependencies: 
+    - test
+  before_script:
+    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
+  script:
+#    - export PROJECT_VERSION=`npm run version`
+    - apk update && apk add jq
+    - export PROJECT_VERSION=`jq -r ".version" < ./package.json`
+    - echo "Project Version=> $PROJECT_VERSION"
+    - docker pull $CI_REGISTRY_IMAGE:latest || true
+    - docker build --cache-from $CI_REGISTRY_IMAGE:latest --tag $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA --tag $CI_REGISTRY_IMAGE:$PROJECT_VERSION --tag $CI_REGISTRY_IMAGE:latest .
+    - docker push $CI_REGISTRY_IMAGE:latest
+# - docker push $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA
+    - docker push $CI_REGISTRY_IMAGE:$PROJECT_VERSION

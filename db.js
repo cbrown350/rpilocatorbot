@@ -1,7 +1,8 @@
 'use strict';
+
 const sqlite = require('sqlite');
 const dbPromise = Promise.resolve()
-  .then(() => sqlite.open(__dirname + '/sqlite3.db', { Promise }))
+  .then(() => sqlite.open(__dirname + '/sql/sqlite3.db', { Promise }))
   .then(db => db.migrate({ force: 'last' }));
 
 var database = {
