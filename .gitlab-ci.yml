@@ -3,7 +3,7 @@ include:
   - template: Security/SAST.gitlab-ci.yml
 
 test:
-  image: node:18
+  image: node:14
   stage: test  
   # when: manual
   variables:
