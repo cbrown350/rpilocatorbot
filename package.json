@@ -11,14 +11,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@gitlab.com/cbrown350/rpilocatorbot"
+    "url": "git+ssh://git@gitlab.com:cbrown350/rpilocatorbot"
   },
+  "docker_image_name": "registry.gitlab.com/cbrown350/rpilocatorbot",
   "bugs": {
     "url": "https://gitlab.com/cbrown350/rpilocatorbot/issues"
   },
   "homepage": "https://gitlab.com/cbrown350/rpilocatorbot#readme",
   "engines": {
-    "node": "~=14.0.0",
+    "node": "^14",
     "npm": ">=6.0.0"
   },
   "dependencies": {

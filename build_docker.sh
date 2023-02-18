@@ -1,6 +1,6 @@
 #!/bin/bash
 
-export TAG=${TAG:=registry.gitlab.com/cbrown350/rpilocatorbot}
+export TAG=`jq -r ".docker_image_name" < ./package.json`
 echo "Tagging image as '${TAG}'"
 export PROJECT_VERSION=`jq -r ".version" < ./package.json`
 docker pull $TAG:latest
