@@ -9,9 +9,10 @@ services:
     environment:
       - TZ=America/Denver
       - LOG_LEVEL=debug
+      - BOT_TOKEN=${BOT_TOKEN}
     volumes:
       - /etc/localtime:/etc/localtime:ro
-      - ./sql:/sql
+      - ./sql:/app/sql
     # healthcheck:
     #   test: ["CMD", "curl", "-IX", "GET", "http://localhost:8000/logged-out"]
     #   interval: 60s

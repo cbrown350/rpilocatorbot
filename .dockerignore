@@ -5,6 +5,7 @@ build/
 tmp/
 temp/
 .env
+.env.dist
 .persistent-cache/
 *-example*
 scratch/
