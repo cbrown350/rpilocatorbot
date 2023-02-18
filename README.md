@@ -2,6 +2,8 @@
 
 ## About
 
+***From the original repo (https://github.com/sschueller/rpilocatorbot), updated by cbrown350@gmail.com to Dockerize the project.***
+
 Many thnks to https://rpilocator.com/ for doing the hard work of finding available stock. Please donate them a coffee if you find this bot useful.
 
 This bot allows you configure filters for the RSS feed from https://rpilocator.com/. It saves it's configration in an sqlite database called ```sqlite3.db```. Devices, Regions and Vendors can be adjusted in the config.json. The RSS feed is read once per minute. Please do not make more calls than that. See https://rpilocator.com/about.cfm
